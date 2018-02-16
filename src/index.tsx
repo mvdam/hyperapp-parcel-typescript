@@ -1,4 +1,4 @@
-import { h, app } from 'hyperapp'
+import { h, app, JSX } from 'hyperapp'
 
 interface IAppState {
   count: number
@@ -18,11 +18,21 @@ const actions: any = {
   up: (value: number) => (state: IAppState): IAppState => ({ count: state.count + value }),
 }
 
+interface ButtonProps {
+  title: string
+  disabled?: boolean
+  onClick: (event: MouseEvent) => void
+}
+
+const Button = ({title, disabled, onClick}: ButtonProps): JSX.Element => (
+  <button type='button' disabled={disabled} onclick={onClick}>
+    { title }
+  </button>
+)
+
 const view = (state, actions) => (
   <div>
-    <h1>{state.count}</h1>
-    <button onclick={() => actions.down(1)}>-</button>
-    <button onclick={() => actions.up(1)}>+</button>
+    <Button title='blaa' onClick={() => console.log('test')} />
   </div>
 )
 
